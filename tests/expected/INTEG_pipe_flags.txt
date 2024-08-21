@@ -1,0 +1,18 @@
+<<<< ../shell "ls -l | head -n 1 NL" >>>>
+[Init.TOKEN -> Command]
+Starting new command: ls
+[Command.TOKEN -> Arguments]
+Appending -l to the argument list
+[Arguments.PIPE -> Make_Pipe]
+Set up pipe
+<<<< Replace <<cmd>> and <<arguments>> as needed >>>>
+Execute <<cmd>> with arguments { <<arguments>> }
+[Make_Pipe.TOKEN -> Command]
+Starting new command: head
+[Command.TOKEN -> Arguments]
+Appending -n to the argument list
+[Arguments.TOKEN -> Arguments]
+Appending 1 to the argument list
+[Arguments.NEWLINE -> Term]
+<<<< Replace <<cmd>> and <<arguments>> as needed >>>>
+Execute <<cmd>> with arguments { <<arguments>> }

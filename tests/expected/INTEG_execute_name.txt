@@ -1,0 +1,8 @@
+<<<< ../shell "ls data NL" >>>>
+[Init.TOKEN -> Command]
+Starting new command: ls
+[Command.TOKEN -> Arguments]
+Appending data to the argument list
+[Arguments.NEWLINE -> Term]
+<<<< Replace <<argument_list>> with all of the arguments >>>>
+Execute ls with arguments { <<argument_list>> }

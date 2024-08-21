@@ -1,0 +1,7 @@
+<<<< ../shell "ls NL" >>>>
+<<<< Replace <<state>> with the new state name after the transition >>>>
+[Init.TOKEN -> <<state>>]
+Starting new command: ls
+[Command.NEWLINE -> Term]
+<<<< Replace <<argument>> with the program name (no quotes) >>>>
+Execute ls with arguments { <<argument>>, (null) }

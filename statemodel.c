@@ -12,14 +12,28 @@
 bool
 handle_event (fsm_t *fsm, event_t event)
 {
-  // TODO: Look up the current state/event combination in the
-  // transition table. Print the following line for debugging
-  // purposes:
-  //   printf ("[%s.%s -> %s]\n", ...);
-  // BOILERPLATE:
-  // TODO: If the state/event combination is valid, execute
-  // the transition and return true. If invalid, call the
-  // error function and return false.
+  assert (fsm != NULL);
+  // assert (fsm->state < NST);
+
+  // lookup curr state/event in transition table
+  action_t effect = NULL;
+  state_t next = fsm->transition (fsm, event, &effect);
+
+  // if invalid/ range of valid values from 0
+  if (next == NST || next < 0)
+    {
+      return false;
+    }
+
+  printf ("[%s.%s -> %s]\n", state_name (fsm->state), event_name (event),
+          state_name (next));
+  // if effect found
+  if (effect != NULL)
+    {
+      effect (fsm);
+    }
+  // set state to next
+  fsm->state = next;
 
   return true;
 }

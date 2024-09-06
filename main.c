@@ -38,11 +38,20 @@ main (int argc, char **argv)
   if (cmdmodel == NULL)
     return EXIT_FAILURE;
 
-  // TODO: Change this to split the string into tokens, where
-  // each token is an event that needs to be handled.
-  event_t event = lookup (argv[1]);
-  handle_event (cmdmodel, event);
-
+  // receive arg
+  char *input = argv[1];
+  // tokenize string input, split at space
+  char *token = strtok (input, " ");
+  // loop through command line args
+  while (token != NULL)
+    {
+      // set token
+      cmdmodel->current_token = token;
+      // lookup for event
+      event_t event = lookup (token);
+      handle_event (cmdmodel, event);
+      token = strtok (NULL, " ");
+    }
   if (cmdmodel->args != NULL)
     free (cmdmodel->args);
 

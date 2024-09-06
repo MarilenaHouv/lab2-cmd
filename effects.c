@@ -13,26 +13,57 @@
 void
 start_command (fsm_t *cmdmodel)
 {
+
+  // copy token to command field of fsm_t
+  cmdmodel->command = cmdmodel->current_token;
+  // setup args and nargs = 1 (for arg dynamically allocate array)
+  cmdmodel->args = calloc (MAX_ARGUMENTS, sizeof (char *));
+  cmdmodel->args[0] = cmdmodel->current_token;
+  cmdmodel->nargs = 1;
   printf ("Starting new command: %s\n", cmdmodel->current_token);
 }
 
 void
 append (fsm_t *cmdmodel)
 {
-  if (cmdmodel->nargs >= MAX_ARGUMENTS)
-    return;
-
-  printf ("Appending %s to the argument list\n", cmdmodel->current_token);
   assert (cmdmodel->args != NULL);
 
+  if (cmdmodel->nargs >= MAX_ARGUMENTS)
+    {
+      return;
+    }
+
+  // store token and increment nargs
+  cmdmodel->args[cmdmodel->nargs] = cmdmodel->current_token;
+  cmdmodel->nargs++;
+  printf ("Appending %s to the argument list\n", cmdmodel->current_token);
 }
 
 void
 execute (fsm_t *cmdmodel)
 {
-  assert (cmdmodel->args != NULL);
 
-  printf ("Execute %s with arguments { %s, %s }", "ls", "ls", NULL);
+  // Start with printing the command
+  printf ("Execute %s with arguments { ", cmdmodel->command);
+
+  // print all args
+  for (int i = 0; i < cmdmodel->nargs; i++)
+    {
+      if (cmdmodel->args[i] != NULL)
+        { // check arg is not null
+          printf ("%s", cmdmodel->args[i]);
+          if (i < cmdmodel->nargs - 1)
+            {
+              printf (", ");
+            }
+        }
+    }
+
+  // add null entry to list
+  printf (", (null) }\n");
+
+  free (cmdmodel->args);
+  cmdmodel->args = NULL;
 }
 
 void
